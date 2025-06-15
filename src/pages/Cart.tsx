@@ -3,8 +3,8 @@ import useCartStore from "../store/useCartStore";
 import { useUserStore } from "../store/userStore";
 
 const Cart = () => {
+  const { items, removeFromCart, clearCart } = useCartStore()();
   const { profile } = useUserStore();
-  const { items, removeFromCart, clearCart } = useCartStore(profile?.id || 0)();
 
   return (
     <div className="cart-page">
@@ -23,7 +23,7 @@ const Cart = () => {
           },
           pageSize: 3,
         }}
-        dataSource={items}
+        dataSource={profile?.id ? items : []}
         renderItem={(item) => (
           <List.Item
             key={item.id}
@@ -53,7 +53,7 @@ const Cart = () => {
           </List.Item>
         )}
       />
-      {items?.length > 0 && (
+      {items?.length && profile?.id.toString() && (
         <Flex
           vertical={false}
           gap={16}

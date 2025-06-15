@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card, Input, Typography } from "antd";
 import { getProducts, type ProductData } from "../services/Products";
-import "./Home.css";
 import useCartStore from "../store/useCartStore";
-import { useUserStore } from "../store/userStore";
+import "./Home.css";
 
 const mockProducts: ProductData[] = [
   {
@@ -54,8 +53,7 @@ const Home = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
-  const { profile } = useUserStore();
-  const { addToCart } = useCartStore(profile?.id || 0)();
+  const { addToCart } = useCartStore()();
 
   useEffect(() => {
     setLoading(true);

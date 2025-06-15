@@ -1,4 +1,4 @@
-import { Menu } from "antd";
+import { Badge, Menu } from "antd";
 import type { MenuProps } from "antd";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router";
@@ -13,11 +13,13 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useNavStore } from "../store/navStore";
+import useCartStore from "../store/useCartStore";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { profile, setProfile } = useUserStore();
   const { activeNav, setActiveNav } = useNavStore();
+  const cartItemsAmount = useCartStore()((state) => state.items.length);
 
   const handleLogout = () => {
     tokenService.removeToken();
@@ -128,9 +130,11 @@ const Navbar = () => {
     {
       key: "cart",
       icon: (
-        <ShoppingCartOutlined
-          style={{ fontSize: "24px", verticalAlign: "middle" }}
-        />
+        <Badge style={{ verticalAlign: "middle" }} count={profile?.id ? cartItemsAmount : 0} style={{ backgroundColor: "#52c41a" }} overflowCount={99}>
+          <ShoppingCartOutlined
+            style={{ fontSize: "24px", verticalAlign: "middle" }}
+          />
+        </Badge>
       ),
       label: (
         <NavLink

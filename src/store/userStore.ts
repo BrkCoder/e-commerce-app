@@ -4,7 +4,7 @@ import type { User } from '../services/Users';
 
 
 interface UserState {
-  profile: User | null;
+  profile: User | null ;
   setProfile: (profile: User | null) => void;
   clearProfile: () => void;
 }
@@ -12,7 +12,7 @@ interface UserState {
 export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
-      profile: null,
+      profile: null ,
       setProfile: (profile: User | null) => set({ profile }),
       clearProfile: () => set({ profile: null }),
     }),

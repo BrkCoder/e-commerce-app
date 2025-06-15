@@ -1,5 +1,6 @@
-import { create } from "zustand";
+import { create, type StoreApi, type UseBoundStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { useUserStore } from "./userStore";
 
 export interface CartItem {
   id: string;
@@ -19,8 +20,10 @@ interface CartState {
   clearCart: () => void;
 }
 
-const useCartStore = (userId: number) =>
-  create<CartState>()(
+const storeCache = new Map<string, UseBoundStore<StoreApi<CartState>>>();
+
+const createCartStore = (key: string) => {
+  return create<CartState>()(
     persist(
       (set) => ({
         items: [],
@@ -30,14 +33,21 @@ const useCartStore = (userId: number) =>
           set((state) => {
             const existingItem = state.items.find((i) => i.id === item.id);
             if (existingItem) {
-              existingItem.quantity += item.quantity;
-            } else {
-              state.items.push(item);
+              return {
+                ...state,
+                items: state.items.map((i) =>
+                  i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+                ),
+                totalPrice: state.totalPrice + item.price,
+                totalQuantity: state.totalQuantity + 1,
+              };
             }
-            state.totalPrice += item.price * item.quantity;
-            state.totalQuantity += item.quantity;
-
-            return state;
+            return {
+              ...state,
+              items: [...state.items, item],
+              totalPrice: state.totalPrice + item.price * item.quantity,
+              totalQuantity: state.totalQuantity + item.quantity,
+            };
           });
         },
         removeFromCart: (id: string) => {
@@ -48,7 +58,7 @@ const useCartStore = (userId: number) =>
               state.totalQuantity -= item.quantity;
               state.items = state.items.filter((i) => i.id !== id);
             }
-            return state;
+            return { ...state };
           });
         },
         clearCart: () => {
@@ -60,10 +70,23 @@ const useCartStore = (userId: number) =>
         },
       }),
       {
-        name: `cart-store-${userId ? userId : ""}`.trim(),
+        name: key,
         storage: createJSONStorage(() => localStorage),
       }
     )
   );
+};
+
+const useCartStore = () => {
+  const userId = useUserStore.getState().profile?.id;
+  const key = userId ? `cart-store-${userId}` : 'cart-store-anonymous';
+
+  if (!storeCache.has(key)) {
+    const store = createCartStore(key);
+    storeCache.set(key, store);
+  }
+
+  return storeCache.get(key);
+};
 
 export default useCartStore;
