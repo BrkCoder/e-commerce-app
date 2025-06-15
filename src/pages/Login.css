@@ -1,0 +1,29 @@
+.login-page {
+  padding: 2rem;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 252, 1);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 1rem;
+}
+
+.login-page .login-title {
+  margin: 0;
+  font-size: 2.25rem;
+  color: rgb(0, 0, 0);
+}
+
+.login-page .login-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 50%;
+}
+
+.login-page .login-form .login-form-label {
+  font-size: 1.125rem;
+  color: rgb(0, 0, 0);
+}
