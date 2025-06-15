@@ -44,9 +44,7 @@ const Cart = () => {
             ]}
           >
             <List.Item.Meta
-              avatar={
-                <Avatar size={'large'} src={item.image} />
-              }
+              avatar={<Avatar size={"large"} src={item.image} />}
               title={item.name}
               description={item.description}
             />

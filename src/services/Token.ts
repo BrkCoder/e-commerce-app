@@ -10,6 +10,6 @@ export const tokenService = {
   },
   isAuthenticated: () => {
     const token = localStorage.getItem("token");
-    return !!token; 
+    return !!token;
   },
 };

@@ -5,14 +5,13 @@ import type { CSSProperties } from "react";
 const { Header, Content, Footer } = Layout;
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
   const headerStyle: CSSProperties = {
     padding: "0 1rem",
     margin: "0",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"space-between",
+    justifyContent: "space-between",
     height: "64px",
   };
 
@@ -39,13 +38,13 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     backgroundColor: "#001529",
     color: "#fff",
     padding: "1rem 0",
-    height:"48px"
+    height: "48px",
   };
 
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
-        <h1 className="logo" style={titleStyle}>E-Commerce App</h1>
+        <h1 style={titleStyle}>E-Commerce App</h1>
         <Navbar />
       </Header>
       <Content style={contentStyle}>{children}</Content>

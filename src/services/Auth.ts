@@ -21,7 +21,8 @@ export function login(loginData: LoginPayload) {
   return fetcher<LoginResponse>(`${API_URL}/auth/login`, {
     method: "POST",
     body: JSON.stringify(loginData),
-  }).then((response) => {
+  })
+    .then((response) => {
       return response;
     })
     .catch((error) => {
@@ -29,24 +30,32 @@ export function login(loginData: LoginPayload) {
     });
 }
 
-export function handleAuthLogin(response: LoginPayload, successCallback: (response: LoginResponse) => void, errorCallback: (error: Error) => void) {
-    return login(response)
-      .then((loginResponse) => {
-        successCallback(loginResponse);
-        return loginResponse;
-      })
-      .catch((error) => {
-        errorCallback(error);
-        return error;
-      });
-  };
+export function handleAuthLogin(
+  response: LoginPayload,
+  successCallback: (response: LoginResponse) => void,
+  errorCallback: (error: Error) => void
+) {
+  return login(response)
+    .then((loginResponse) => {
+      successCallback(loginResponse);
+      return loginResponse;
+    })
+    .catch((error) => {
+      errorCallback(error);
+      return error;
+    });
+}
 
-  export function handleAuthProfile(id: number, successCallback: (profile: User) => void, errorCallback: (error: Error) => void) {
-    return getUserById(id)
-      .then((profile) => {
-        successCallback(profile);
-      })
-      .catch((error) => {
-        errorCallback(error);
-      });
-  };
+export function handleAuthProfile(
+  id: number,
+  successCallback: (profile: User) => void,
+  errorCallback: (error: Error) => void
+) {
+  return getUserById(id)
+    .then((profile) => {
+      successCallback(profile);
+    })
+    .catch((error) => {
+      errorCallback(error);
+    });
+}

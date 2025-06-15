@@ -91,7 +91,9 @@ export function deleteProduct(id: number) {
 
 //[GET] https://api.escuelajs.co/api/v1/products?offset=0&limit=10
 export function getProductsPaginated(offset: number, limit: number) {
-  return fetcher<ProductData[]>(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
+  return fetcher<ProductData[]>(
+    `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`
+  )
     .then((response) => {
       return response;
     })
@@ -113,10 +115,11 @@ export function getRelatedProducts(id: number) {
     });
 }
 
-
 //[GET] https://api.escuelajs.co/api/v1/products/slug/handmade-fresh-table/related
 export function getRelatedProductsBySlug(slug: string) {
-  return fetcher(`https://api.escuelajs.co/api/v1/products/slug/${slug}/related`)
+  return fetcher(
+    `https://api.escuelajs.co/api/v1/products/slug/${slug}/related`
+  )
     .then((response) => {
       return response;
     })

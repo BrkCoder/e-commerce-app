@@ -11,11 +11,3 @@
     gap: 0.5rem;
     flex-wrap: wrap;
 }
-
-.ant-carousel .slick-prev,
-.ant-carousel .slick-next,
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-next:hover {
-  font-size: 32px;
-  color: rgb(0, 0, 0);
-}

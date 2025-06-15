@@ -1,10 +1,10 @@
 import { Button, Flex, Form, Input } from "antd";
-import "./Signup.css";
 import { createUser, type User } from "../services/Users";
 import { useAlertStore } from "../store/alertStore";
 import type { CreateUserData } from "../services/Users";
 import useLogin from "../hooks/useLogin";
 import useProfile from "../hooks/useProfile";
+import "./Signup.css";
 
 interface SignUpValues {
   firstName: string;
@@ -23,7 +23,7 @@ export const SignUp = () => {
       id: 0,
       email: values.email,
       password: values.password,
-      username: values.email
+      username: values.email,
     };
   };
 
@@ -33,14 +33,16 @@ export const SignUp = () => {
         console.log("User created successfully:", response);
         setTimeout(() => {
           handleLogin({
-            username:  "johnd", //response.username,
-            password: "m38rmF$" // response.password
-          }).then((response: Pick<User, "id">) => {
-            console.log("Login successful after signup:", response);
-            handleProfile(1); // Assuming 1 is the user ID for the newly created user
-          }).catch((error: Error) => {
-            console.error("Error logging in after signup:", error);
-          });
+            username: "johnd", //response.username,
+            password: "m38rmF$", // response.password
+          })
+            .then((response: Pick<User, "id">) => {
+              console.log("Login successful after signup:", response);
+              handleProfile(1); // Assuming 1 is the user ID for the newly created user
+            })
+            .catch((error: Error) => {
+              console.error("Error logging in after signup:", error);
+            });
         }, 3000);
       })
       .catch((error: Error) => {

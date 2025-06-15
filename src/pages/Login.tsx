@@ -1,12 +1,12 @@
+import { useEffect, useRef, type CSSProperties } from "react";
 import { Button, Flex, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import useLogin from "../hooks/useLogin";
 import useProfile from "../hooks/useProfile";
-import { useEffect, useRef, type CSSProperties } from "react";
 import { getUsers, type User } from "../services/Users";
 import type { LoginPayload } from "../services/Auth";
-import "./Login.css";
 import type { Rule } from "antd/es/form";
+import "./Login.css";
 
 
 const Login = () => {

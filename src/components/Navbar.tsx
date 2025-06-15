@@ -1,6 +1,5 @@
 import { Badge, Menu } from "antd";
 import type { MenuProps } from "antd";
-import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router";
 import { useUserStore } from "../store/userStore";
 import { tokenService } from "../services/Token";
@@ -14,8 +13,9 @@ import {
 } from "@ant-design/icons";
 import { useNavStore } from "../store/navStore";
 import useCartStore from "../store/useCartStore";
+import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const { profile, setProfile } = useUserStore();
   const { activeNav, setActiveNav } = useNavStore();
@@ -30,7 +30,7 @@ const Navbar = () => {
 
   const accountMenu = profile
     ? {
-        type: "submenu" as const, // Using 'as const' to ensure TypeScript infers the type correctly as literal type
+        type: "submenu" as const,
         key: "account",
         label: <span>{profile.username}</span>,
         style: {

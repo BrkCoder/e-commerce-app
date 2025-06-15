@@ -2,55 +2,13 @@ import { useEffect, useState } from "react";
 import { Card, Input, Typography } from "antd";
 import { getProducts, type ProductData } from "../services/Products";
 import useCartStore from "../store/useCartStore";
+import { mockProducts } from "../mocks/Products";
 import "./Home.css";
 
-const mockProducts: ProductData[] = [
-  {
-    id: 0,
-    title: "Loading...",
-    price: 0,
-    description: "Please wait while we fetch the products.",
-    image: "",
-    category: "",
-  },
-  {
-    id: 1,
-    title: "Loading...",
-    price: 0,
-    description: "Please wait while we fetch the products.",
-    image: "",
-    category: "",
-  },
-  {
-    id: 2,
-    title: "Loading...",
-    price: 0,
-    description: "Please wait while we fetch the products.",
-    image: "",
-    category: "",
-  },
-  {
-    id: 3,
-    title: "Loading...",
-    price: 0,
-    description: "Please wait while we fetch the products.",
-    image: "",
-    category: "",
-  },
-  {
-    id: 4,
-    title: "Loading...",
-    price: 0,
-    description: "Please wait while we fetch the products.",
-    image: "",
-    category: "",
-  },
-];
 const Home = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
-
-  const [filteredProducts, setFilteredProducts] = useState<ProductData[]>(mockProducts);
-
+  const [filteredProducts, setFilteredProducts] =
+    useState<ProductData[]>(mockProducts);
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
   const { addToCart } = useCartStore()();
@@ -62,7 +20,6 @@ const Home = () => {
         setProducts(response);
         setFilteredProducts(handleFilter(response, filter));
         setFilter("");
-        console.log("Products fetched successfully:", response);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -85,6 +42,18 @@ const Home = () => {
     return filtered;
   };
 
+  const handleAddToCart = (product: ProductData) => {
+    const cartItem = {
+      id: product.id.toString(),
+      name: product.title,
+      price: product.price,
+      quantity: 1,
+      image: product.image || "",
+      description: product.description || "",
+    };
+    addToCart(cartItem);
+  };
+
   return (
     <div className="home-page">
       <Input.Search
@@ -103,17 +72,7 @@ const Home = () => {
             className="product-item"
             loading={loading}
             actions={[
-              <span key="add-to-cart" onClick={() => {
-                const cartItem = {
-                  id: product.id.toString(),
-                  name: product.title,
-                  price: product.price,
-                  quantity: 1,
-                  image: product.image || "",
-                  description: product.description || "",
-                };
-                addToCart(cartItem);
-              }}>
+              <span key="add-to-cart" onClick={() => handleAddToCart(product)}>
                 Add to Cart
               </span>,
               <span key="view-details">View Details</span>,
@@ -159,4 +118,3 @@ const Home = () => {
 };
 
 export default Home;
-

@@ -79,14 +79,14 @@ const createCartStore = (key: string) => {
 
 const useCartStore = () => {
   const userId = useUserStore.getState().profile?.id;
-  const key = userId ? `cart-store-${userId}` : 'cart-store-anonymous';
+  const key = userId ? `cart-store-${userId}` : "cart-store-anonymous";
 
   if (!storeCache.has(key)) {
     const store = createCartStore(key);
     storeCache.set(key, store);
   }
 
-  return storeCache.get(key);
+  return storeCache.get(key)!; //The ! symbol in TypeScript is the non-null assertion operator.
 };
 
 export default useCartStore;

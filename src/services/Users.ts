@@ -1,32 +1,34 @@
 import { fetcher } from "./Fetcher";
 
 export interface User {
-    address: {
-        geolocation: {
-            lat: string;
-            long: string;
-        };
-        city: string;
-        street: string;
-        number: number;
-        zipcode: string;
+  address: {
+    geolocation: {
+      lat: string;
+      long: string;
     };
-    id: number;
-    email: string;
-    username: string;
-    password: string;
-    name: {
-        firstname: string;
-        lastname: string;
-    };
-    phone: string;
+    city: string;
+    street: string;
+    number: number;
+    zipcode: string;
+  };
+  id: number;
+  email: string;
+  username: string;
+  password: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  phone: string;
 }
 
+export type CreateUserData = Pick<
+  User,
+  "id" | "email" | "password" | "username"
+>;
+export type UpdateUserData = Pick<User, "name" | "email">;
 
-export type CreateUserData = Pick<User, 'id' | 'email' | 'password' | 'username'>;
-export type UpdateUserData = Pick<User, 'name' | 'email'>;
-
-const API_URL: string = 'https://fakestoreapi.com';
+const API_URL: string = "https://fakestoreapi.com";
 
 /**
  * https://fakestoreapi.com/users
@@ -42,49 +44,48 @@ export function getUsers() {
     });
 }
 
-
 /**
  * https://fakestoreapi.com/users/{id}
  * @param id - The ID of the user to fetch
- * @returns 
+ * @returns
  */
 export function getUserById(id: number) {
   return fetcher<User>(`${API_URL}/users/${id}`)
     .then((response) => {
-        return response;
+      return response;
     })
     .catch((error) => {
       throw error;
     });
 }
-
 
 /**
  * https://fakestoreapi.com/users/
  * @param userData - The data for the new user to be created
- * @returns 
+ * @returns
  */
 export function createUser(userData: CreateUserData) {
   return fetcher<CreateUserData>(`${API_URL}/users`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(userData),
-  }).then((response) => {
-       return response;
+  })
+    .then((response) => {
+      return response;
     })
     .catch((error) => {
       throw error;
     });
 }
 
- /**
+/**
  * https://fakestoreapi.com/users/{id}
  * @param id - The ID of the user to update
  * @param userData - The updated user data
- * @returns 
+ * @returns
  */
 export function updateUser(id: number, userData: UpdateUserData) {
   return fetcher(`${API_URL}/users/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     body: JSON.stringify(userData),
   })
     .then((response) => {
@@ -98,11 +99,11 @@ export function updateUser(id: number, userData: UpdateUserData) {
 /**
  * https://fakestoreapi.com/users/{id}
  * @param id - The ID of the user to delete
- * @returns 
+ * @returns
  */
 export function deleteUser(id: number) {
   return fetcher(`${API_URL}/users/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
   })
     .then((response) => {
       return response;
@@ -110,5 +111,4 @@ export function deleteUser(id: number) {
     .catch((error) => {
       throw error;
     });
-  }
-
+}
