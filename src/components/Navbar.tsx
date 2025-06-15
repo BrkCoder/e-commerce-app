@@ -1,6 +1,6 @@
 import { Badge, Menu } from "antd";
 import type { MenuProps } from "antd";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { useUserStore } from "../store/userStore";
 import { tokenService } from "../services/Token";
 import {
@@ -16,11 +16,14 @@ import useCartStore from "../store/useCartStore";
 import "./Navbar.css";
 
 const Navbar: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { profile, setProfile } = useUserStore();
-  const { activeNav, setActiveNav } = useNavStore();
+  const { setActiveNav } = useNavStore();
   const cartItemsAmount = useCartStore()((state) => state.items.length);
 
+  console.log("location.pathname", location.pathname);
+  
   const handleLogout = () => {
     tokenService.removeToken();
     setProfile(null);
@@ -52,7 +55,7 @@ const Navbar: React.FC = () => {
         ),
         children: [
           {
-            key: "profile",
+            key: "/account/profile",
             icon: (
               <UserOutlined
                 style={{ fontSize: "24px", verticalAlign: "middle" }}
@@ -61,7 +64,7 @@ const Navbar: React.FC = () => {
             label: "profile",
           },
           {
-            key: "logout",
+            key: "/account/logout",
             icon: (
               <LogoutOutlined
                 style={{ fontSize: "24px", verticalAlign: "middle" }}
@@ -86,7 +89,7 @@ const Navbar: React.FC = () => {
         ),
         children: [
           {
-            key: "login",
+            key: "/account/login",
             icon: (
               <LoginOutlined
                 style={{ fontSize: "24px", verticalAlign: "middle" }}
@@ -97,7 +100,7 @@ const Navbar: React.FC = () => {
             }}>Login</NavLink>
           },
           {
-            key: "register",
+            key: "/account/register",
             icon: (
               <UserAddOutlined
                 style={{ fontSize: "24px", verticalAlign: "middle" }}
@@ -112,7 +115,7 @@ const Navbar: React.FC = () => {
 
   const items: MenuProps["items"] = [
     {
-      key: "home",
+      key: "/",
       icon: (
         <HomeOutlined style={{ fontSize: "24px", verticalAlign: "middle" }} />
       ),
@@ -128,13 +131,15 @@ const Navbar: React.FC = () => {
       ),
     },
     {
-      key: "cart",
+      key: "/cart",
       icon: (
-        <Badge style={{ verticalAlign: "middle" }} count={profile?.id ? cartItemsAmount : 0} style={{ backgroundColor: "#52c41a" }} overflowCount={99}>
-          <ShoppingCartOutlined
-            style={{ fontSize: "24px", verticalAlign: "middle" }}
-          />
-        </Badge>
+        <div style={{ height: '64px' }}>
+          <Badge showZero={false} style={{ backgroundColor: "#52c41a" }}  count={profile?.id ? cartItemsAmount : 0} overflowCount={99}>
+            <ShoppingCartOutlined
+              style={{ color: "#fff", fontSize: "24px" }}
+            />
+          </Badge>
+        </div>
       ),
       label: (
         <NavLink
@@ -156,7 +161,7 @@ const Navbar: React.FC = () => {
       theme="dark"
       mode="horizontal"
       defaultSelectedKeys={[firstItemKey]}
-      selectedKeys={[activeNav]}
+      selectedKeys={[location.pathname]}
       items={items}
       style={{ display: "flex", flexDirection: "row", minWidth: "350px" }}
     />
