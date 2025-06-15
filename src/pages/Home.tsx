@@ -3,6 +3,7 @@ import { Card, Input, Typography } from "antd";
 import { getProducts, type ProductData } from "../services/Products";
 import "./Home.css";
 import useCartStore from "../store/useCartStore";
+import { useUserStore } from "../store/userStore";
 
 const mockProducts: ProductData[] = [
   {
@@ -53,8 +54,8 @@ const Home = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
-
-  const { addToCart } = useCartStore();
+  const { profile } = useUserStore();
+  const { addToCart } = useCartStore(profile?.id || 0)();
 
   useEffect(() => {
     setLoading(true);

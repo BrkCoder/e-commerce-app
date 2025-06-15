@@ -1,13 +1,15 @@
 import { Avatar, Button, Flex, List, Typography } from "antd";
 import useCartStore from "../store/useCartStore";
+import { useUserStore } from "../store/userStore";
 
 const Cart = () => {
-  const { items, removeFromCart, clearCart } = useCartStore();
+  const { profile } = useUserStore();
+  const { items, removeFromCart, clearCart } = useCartStore(profile?.id || 0)();
 
   return (
     <div className="cart-page">
       <Typography.Title level={2}>My Cart</Typography.Title>
-      {items.length === 0 && (
+      {items?.length === 0 && (
         <Typography.Paragraph>
           Your cart is empty. Start shopping!
         </Typography.Paragraph>
@@ -51,7 +53,7 @@ const Cart = () => {
           </List.Item>
         )}
       />
-      {items.length > 0 && (
+      {items?.length > 0 && (
         <Flex
           vertical={false}
           gap={16}
@@ -63,7 +65,7 @@ const Cart = () => {
             <Typography.Title level={4}>Cart Summary:</Typography.Title>
             <Flex vertical={true} gap={16} align="flex-start">
               <Typography.Paragraph>
-                Total Items: {items.length} <br />
+                Total Items: {items?.length} <br />
                 Total Price: $
                 {items
                   .reduce(
