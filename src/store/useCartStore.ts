@@ -1,6 +1,6 @@
 import { create, type StoreApi, type UseBoundStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { useUserStore } from "./userStore";
+import { useUserStore } from "./useUserStore";
 
 export interface CartItem {
   id: string;

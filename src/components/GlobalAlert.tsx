@@ -1,5 +1,5 @@
 import { Alert } from "antd";
-import { useAlertStore } from "../store/alertStore";
+import { useAlertStore } from "../store/useAlertStore";
 import "./GlobalAlert.css";
 
 const GlobalAlert: React.FC = () => {

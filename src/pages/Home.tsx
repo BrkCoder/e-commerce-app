@@ -5,7 +5,7 @@ import useCartStore from "../store/useCartStore";
 import { mockProducts } from "../mocks/Products";
 import "./Home.css";
 
-const Home = () => {
+const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductData[]>(mockProducts);

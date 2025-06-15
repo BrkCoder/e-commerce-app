@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input } from "antd";
 import { createUser, type User } from "../services/Users";
-import { useAlertStore } from "../store/alertStore";
+import { useAlertStore } from "../store/useAlertStore";
 import type { CreateUserData } from "../services/Users";
 import useLogin from "../hooks/useLogin";
 import useProfile from "../hooks/useProfile";
@@ -13,7 +13,7 @@ interface SignUpValues {
   password: string;
 }
 
-export const SignUp = () => {
+export const SignUp: React.FC = () => {
   const { show } = useAlertStore();
   const { handleLogin } = useLogin();
   const { handleProfile } = useProfile();

@@ -1,6 +1,6 @@
 import { handleAuthProfile } from "../services/Auth";
 import type { User } from "../services/Users";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/useUserStore";
 
 const useProfile = () => {
     const { setProfile } = useUserStore();

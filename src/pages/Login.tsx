@@ -9,7 +9,7 @@ import type { Rule } from "antd/es/form";
 import "./Login.css";
 
 
-const Login = () => {
+const Login: React.FC = () => {
   const users = useRef<User[]>([]);
   const { handleLogin } = useLogin();
   const { handleProfile } = useProfile();

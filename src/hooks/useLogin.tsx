@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import { useAlertStore } from "../store/alertStore";
+import { useAlertStore } from "../store/useAlertStore";
 import { handleAuthLogin, type LoginResponse } from "../services/Auth";
 import { tokenService } from "../services/Token";
-import { useNavStore } from "../store/navStore";
+import { useNavStore } from "../store/useNavStore";
 
 const useLogin = () => {
   const navigate = useNavigate();

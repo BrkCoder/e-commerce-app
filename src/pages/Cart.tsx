@@ -1,8 +1,8 @@
 import { Avatar, Button, Flex, List, Typography } from "antd";
 import useCartStore from "../store/useCartStore";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/useUserStore";
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const { items, removeFromCart, clearCart } = useCartStore()();
   const { profile } = useUserStore();
 

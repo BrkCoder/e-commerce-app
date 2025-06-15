@@ -1,7 +1,7 @@
 import { Badge, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { NavLink, useLocation, useNavigate } from "react-router";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/useUserStore";
 import { tokenService } from "../services/Token";
 import {
   HomeOutlined,
@@ -11,9 +11,8 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useNavStore } from "../store/navStore";
+import { useNavStore } from "../store/useNavStore";
 import useCartStore from "../store/useCartStore";
-import "./Navbar.css";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -21,8 +20,6 @@ const Navbar: React.FC = () => {
   const { profile, setProfile } = useUserStore();
   const { setActiveNav } = useNavStore();
   const cartItemsAmount = useCartStore()((state) => state.items.length);
-
-  console.log("location.pathname", location.pathname);
   
   const handleLogout = () => {
     tokenService.removeToken();
