@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# E-Commerce App - React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app is an e-Commerce app with a fake backend(https://fakestoreapi.com/)
+Because this api is fake, we can't do any mutation to entities on the backend like create,update or delete. as a result of this technical decision, the app have some constraints:
+1. Registration is limited, the process of register is exist but we can add a new record to backend, the app register the new user but logging with other specific user which exist in the system and can't be modify or removed.
+2. Login is limited, you login only with the following users:
+  > 
+    "username": "johnd",
+    "password": "m38rmF$", 
 
-Currently, two official plugins are available:
+    "username": "mor_2314",
+    "password": "83r5^_",
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    "username": "kevinryan",
+    "password": "kev02937@",
 
-## Expanding the ESLint configuration
+    "username": "donero",
+    "password": "ewedon",
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    "username": "derek",
+    "password": "jklg*_56",
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    "username": "david_r",
+    "password": "3478*#54",
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    "username": "snyder",
+    "password": "f238&@*$",
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    "username": "hopkins",
+    "password": "William56$hj",
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+    "username": "kate_h",
+    "password": "kfejk@*_",
+
+    "username": "jimmie_k",
+    "password": "klein*#%*" 
+
+3. Add to card is scoped to user only and is implemented using local-storage and not fake backend because this backend is immutable. 
+
