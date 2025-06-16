@@ -1,9 +1,10 @@
 # E-Commerce App - React + TypeScript + Vite
 
-This app is an e-Commerce app with a fake backend(https://fakestoreapi.com/)
-Because this api is fake, we can't do any mutation to entities on the backend like create,update or delete. as a result of this technical decision, the app have some constraints:
-1. Registration is limited, the process of register is exist but we can add a new record to backend, the app register the new user but logging with other specific user which exist in the system and can't be modify or removed.
-2. Login is limited, you login only with the following users:
+Since this API is a mock service, it does not support mutations — meaning you cannot create, update, or delete any data on the backend. As a result, the app has the following constraints:
+
+1. Registration is limited – The registration process exists in the UI, but new user data cannot actually be saved to the backend. When a user "registers," the app simulates the process but ultimately logs in as a predefined, hardcoded user. These predefined users cannot be modified or removed.
+
+2. Login is restricted – You can only log in using one of the following hardcoded users:
   > 
     "username": "johnd",
     "password": "m38rmF$", 
@@ -35,5 +36,5 @@ Because this api is fake, we can't do any mutation to entities on the backend li
     "username": "jimmie_k",
     "password": "klein*#%*" 
 
-3. Add to card is scoped to user only and is implemented using local-storage and not fake backend because this backend is immutable. 
+3. Add to Cart is scoped per user – The cart functionality is implemented using localStorage and not persisted via the fake backend, due to its read-only limitation. 
 
